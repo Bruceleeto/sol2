@@ -483,7 +483,7 @@ namespace sol {
 		}
 
 		template <typename T>
-		void usertype_alloc_destroy_mem(lua_State* L, void* memory) noexcept {
+		void usertype_alloc_destroy_mem(lua_State*, void* memory) noexcept {
 			memory = align_usertype_pointer(memory);
 			T** pdata = static_cast<T**>(memory);
 			T* data = *pdata;
@@ -499,7 +499,7 @@ namespace sol {
 		}
 
 		template <typename T>
-		void unique_destroy_mem(lua_State* L, void* memory) noexcept {
+		void unique_destroy_mem(lua_State*, void* memory) noexcept {
 			memory = align_usertype_unique_destructor(memory);
 			unique_destructor& dx = *static_cast<unique_destructor*>(memory);
 			memory = align_usertype_unique_tag<true>(memory);
@@ -514,7 +514,7 @@ namespace sol {
 		}
 
 		template <typename T>
-		void user_alloc_destroy_mem(lua_State* L, void* memory) noexcept {
+		void user_alloc_destroy_mem(lua_State*, void* memory) noexcept {
 			void* aligned_memory = align_user<T>(memory);
 			T* typed_memory = static_cast<T*>(aligned_memory);
 			std::allocator<T> alloc;
